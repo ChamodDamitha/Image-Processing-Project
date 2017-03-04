@@ -175,7 +175,7 @@
     <Component class="javax.swing.JSpinner" name="spinnerScale">
       <Properties>
         <Property name="value" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="100&#xd;&#xa;" type="code"/>
+          <Connection code="200&#xd;&#xa;" type="code"/>
         </Property>
       </Properties>
     </Component>
@@ -186,7 +186,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="LINEAR INTERPOLATION METHOD"/>
+        <Property name="text" type="java.lang.String" value="BI-LINEAR INTERPOLATION METHOD"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane4">

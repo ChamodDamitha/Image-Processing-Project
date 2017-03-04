@@ -87,12 +87,12 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        spinnerScale.setValue(100
+        spinnerScale.setValue(200
         );
 
         jLabel1.setText("NEAREST NEIGHBOUR METHOD");
 
-        jLabel2.setText("LINEAR INTERPOLATION METHOD");
+        jLabel2.setText("BI-LINEAR INTERPOLATION METHOD");
 
         lbl_processed_img_linear_int.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jScrollPane4.setViewportView(lbl_processed_img_linear_int);
@@ -204,6 +204,9 @@ public class MainFrame extends javax.swing.JFrame {
         processed_image=ResampleImage.resampleImage_nearest_neighbour(original_image, scale);
         drawProcessedImage(lbl_processed_img_nearest_neighbour,processed_image);
         
+        
+        processed_image=ResampleImage.resampleImage_linear_interpolation(original_image, scale);
+        drawProcessedImage(lbl_processed_img_linear_int, processed_image);
         
         
     }//GEN-LAST:event_btnScaleActionPerformed
