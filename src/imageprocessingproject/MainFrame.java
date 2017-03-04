@@ -11,6 +11,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.hsqldb.map.BitMap;
@@ -23,7 +24,6 @@ public class MainFrame extends javax.swing.JFrame {
 
     JFileChooser filechooser;
     private BufferedImage original_image,processed_image;
-    private int scaled_ratio=0;
     
     private BitMap bitMapOriginalImg=null;
            
@@ -48,10 +48,17 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         lbl_original_img = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        lbl_processed_img = new javax.swing.JLabel();
+        lbl_processed_img_cubic_int = new javax.swing.JLabel();
         btnOpenFile = new javax.swing.JButton();
-        btnScaleUp = new javax.swing.JButton();
-        btnScaleDown = new javax.swing.JButton();
+        btnScale = new javax.swing.JButton();
+        spinnerScale = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        lbl_processed_img_linear_int = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        lbl_processed_img_nearest_neighbour = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -63,8 +70,8 @@ public class MainFrame extends javax.swing.JFrame {
         lbl_original_img.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jScrollPane1.setViewportView(lbl_original_img);
 
-        lbl_processed_img.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jScrollPane2.setViewportView(lbl_processed_img);
+        lbl_processed_img_cubic_int.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jScrollPane2.setViewportView(lbl_processed_img_cubic_int);
 
         btnOpenFile.setText("OPEN");
         btnOpenFile.addActionListener(new java.awt.event.ActionListener() {
@@ -73,19 +80,27 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        btnScaleUp.setText("Scale Up ( X 2 )");
-        btnScaleUp.addActionListener(new java.awt.event.ActionListener() {
+        btnScale.setText("Scale");
+        btnScale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnScaleUpActionPerformed(evt);
+                btnScaleActionPerformed(evt);
             }
         });
 
-        btnScaleDown.setText("Scale Down ( X 2 )");
-        btnScaleDown.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnScaleDownActionPerformed(evt);
-            }
-        });
+        spinnerScale.setValue(100
+        );
+
+        jLabel1.setText("NEAREST NEIGHBOUR METHOD");
+
+        jLabel2.setText("LINEAR INTERPOLATION METHOD");
+
+        lbl_processed_img_linear_int.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jScrollPane4.setViewportView(lbl_processed_img_linear_int);
+
+        lbl_processed_img_nearest_neighbour.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jScrollPane3.setViewportView(lbl_processed_img_nearest_neighbour);
+
+        jLabel3.setText("CUBIC INTERPOLATION METHOD");
 
         menuFile.setText("File");
 
@@ -114,31 +129,56 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnOpenFile))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnScaleUp)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnScaleDown, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 45, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(254, 254, 254)
+                                .addComponent(jLabel2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnOpenFile, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                            .addComponent(btnScale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(4, 4, 4)
+                        .addComponent(spinnerScale, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnOpenFile, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(btnScaleUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnScaleDown, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnScale, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spinnerScale, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -157,22 +197,20 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnOpenFileActionPerformed
 
-    private void btnScaleUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScaleUpActionPerformed
-        scaled_ratio++;
-        processed_image=ResampleImage.resampleImageBy2n(original_image,scaled_ratio);
-        drawProcessedImage();
+    private void btnScaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScaleActionPerformed
+
+        float scale=(Integer)spinnerScale.getValue()/100.0f;
         
-    }//GEN-LAST:event_btnScaleUpActionPerformed
+        processed_image=ResampleImage.resampleImage_nearest_neighbour(original_image, scale);
+        drawProcessedImage(lbl_processed_img_nearest_neighbour,processed_image);
+        
+        
+        
+    }//GEN-LAST:event_btnScaleActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void btnScaleDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScaleDownActionPerformed
-        scaled_ratio--;
-        processed_image=ResampleImage.resampleImageBy2n(original_image,scaled_ratio);
-        drawProcessedImage();
-    }//GEN-LAST:event_btnScaleDownActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,18 +249,25 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOpenFile;
-    private javax.swing.JButton btnScaleDown;
-    private javax.swing.JButton btnScaleUp;
+    private javax.swing.JButton btnScale;
     private javax.swing.JFileChooser jFileChooser1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lbl_original_img;
-    private javax.swing.JLabel lbl_processed_img;
+    private javax.swing.JLabel lbl_processed_img_cubic_int;
+    private javax.swing.JLabel lbl_processed_img_linear_int;
+    private javax.swing.JLabel lbl_processed_img_nearest_neighbour;
     private javax.swing.JMenu menuFile;
+    private javax.swing.JSpinner spinnerScale;
     // End of variables declaration//GEN-END:variables
 
     private void drawOriginalImage() {
@@ -230,9 +275,9 @@ public class MainFrame extends javax.swing.JFrame {
         lbl_original_img.setIcon(new ImageIcon(original_image));
     }
     
-     private void drawProcessedImage() {
-        lbl_processed_img.setSize(processed_image.getWidth(), processed_image.getHeight());
-        lbl_processed_img.setIcon(new ImageIcon(processed_image));
+     private void drawProcessedImage(JLabel jLabel,BufferedImage image) {
+        jLabel.setSize(image.getWidth(), image.getHeight());
+        jLabel.setIcon(new ImageIcon(image));
     }
     
     

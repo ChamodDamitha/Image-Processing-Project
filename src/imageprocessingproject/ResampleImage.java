@@ -15,42 +15,30 @@ import java.awt.image.BufferedImage;
 public class ResampleImage {
     
 //  Nearest neighbour method  
-    public static BufferedImage resampleImageBy2n(BufferedImage image,int ratio){
-        BufferedImage tempImage=null;
+    
+    public static BufferedImage resampleImage_nearest_neighbour(BufferedImage image,float scale){
+        BufferedImage tempImage=new BufferedImage(Math.round(image.getWidth()*scale),Math.round(image.getHeight()*scale),
+                        BufferedImage.TYPE_INT_RGB);
         
-        if(ratio==0){
-            return image;        
-        }
-        else if(ratio>0){
-            for(int k=0;k<ratio;k++){ 
-                tempImage=new BufferedImage(image.getWidth()*2,image.getHeight()*2,
-                        BufferedImage.TYPE_INT_RGB);
-
-                int imgWidth=tempImage.getWidth();
-                int imgHeight=tempImage.getHeight();
-                for(int i=0;i<imgWidth;i++){
-                    for(int j=0;j<imgHeight;j++){
-                        tempImage.setRGB(i, j, image.getRGB(i/2, j/2));
-                    }
-                }
-                image=tempImage;
+        int imgWidth=tempImage.getWidth();
+        int imgHeight=tempImage.getHeight();
+        for(int i=0;i<imgWidth;i++){
+            for(int j=0;j<imgHeight;j++){
+                
+                tempImage.setRGB(i, j, image.getRGB((int)(i/scale), (int)(j/scale)));                
             }
         }
-        else{
-            for(int k=0;k<-ratio;k++){ 
-                tempImage=new BufferedImage(image.getWidth()/2, image.getHeight()/2,
+        return tempImage;
+    }
+    
+    public static BufferedImage resampleImage_linear_interpolation(BufferedImage image,float scale){
+        BufferedImage tempImage=new BufferedImage(Math.round(image.getWidth()*scale),Math.round(image.getHeight()*scale),
                         BufferedImage.TYPE_INT_RGB);
-
-                int imgWidth=tempImage.getWidth();
-                int imgHeight=tempImage.getHeight();
-                for(int i=0;i<imgWidth;i++){
-                    for(int j=0;j<imgHeight;j++){
-                        tempImage.setRGB(i, j, image.getRGB(i*2, j*2));
-                    }
-                }
-                image=tempImage;
-            }
-        }
+        
+        int imgWidth=tempImage.getWidth();
+        int imgHeight=tempImage.getHeight();
+        
+        
         
         return tempImage;
     }
