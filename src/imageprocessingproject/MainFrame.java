@@ -23,6 +23,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     JFileChooser filechooser;
     private BufferedImage original_image,processed_image;
+    private int scaled_ratio=0;
     
     private BitMap bitMapOriginalImg=null;
            
@@ -34,6 +35,8 @@ public class MainFrame extends javax.swing.JFrame {
         filechooser.addChoosableFileFilter(new FileNameExtensionFilter("PNG", "PNG"));
         filechooser.addChoosableFileFilter(new FileNameExtensionFilter("GIF", "GIF"));
         filechooser.addChoosableFileFilter(new FileNameExtensionFilter("tt", "tt"));
+        
+        
         
     }
 
@@ -47,9 +50,12 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         lbl_processed_img = new javax.swing.JLabel();
         btnOpenFile = new javax.swing.JButton();
-        btnScale = new javax.swing.JButton();
+        btnScaleUp = new javax.swing.JButton();
+        btnScaleDown = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menuFile = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,6 +63,7 @@ public class MainFrame extends javax.swing.JFrame {
         lbl_original_img.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jScrollPane1.setViewportView(lbl_original_img);
 
+        lbl_processed_img.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jScrollPane2.setViewportView(lbl_processed_img);
 
         btnOpenFile.setText("OPEN");
@@ -66,15 +73,35 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        btnScale.setText("Scale by 2");
-        btnScale.addActionListener(new java.awt.event.ActionListener() {
+        btnScaleUp.setText("Scale Up ( X 2 )");
+        btnScaleUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnScaleActionPerformed(evt);
+                btnScaleUpActionPerformed(evt);
             }
         });
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        btnScaleDown.setText("Scale Down ( X 2 )");
+        btnScaleDown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnScaleDownActionPerformed(evt);
+            }
+        });
+
+        menuFile.setText("File");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Open File");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuFile.add(jMenuItem1);
+
+        jMenuItem2.setText("jMenuItem2");
+        menuFile.add(jMenuItem2);
+
+        jMenuBar1.add(menuFile);
 
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
@@ -86,31 +113,32 @@ public class MainFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnOpenFile))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnScale))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnScaleUp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnScaleDown, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(btnOpenFile)
-                        .addGap(27, 27, 27))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnScale)
-                        .addGap(18, 18, 18)))
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addContainerGap(125, Short.MAX_VALUE))
+                    .addComponent(btnOpenFile, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                    .addComponent(btnScaleUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnScaleDown, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         pack();
@@ -129,10 +157,22 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnOpenFileActionPerformed
 
-    private void btnScaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScaleActionPerformed
-        processed_image=resampleImageBy2(original_image);
+    private void btnScaleUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScaleUpActionPerformed
+        scaled_ratio++;
+        processed_image=ResampleImage.resampleImageBy2n(original_image,scaled_ratio);
         drawProcessedImage();
-    }//GEN-LAST:event_btnScaleActionPerformed
+        
+    }//GEN-LAST:event_btnScaleUpActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void btnScaleDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScaleDownActionPerformed
+        scaled_ratio--;
+        processed_image=ResampleImage.resampleImageBy2n(original_image,scaled_ratio);
+        drawProcessedImage();
+    }//GEN-LAST:event_btnScaleDownActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,15 +211,18 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOpenFile;
-    private javax.swing.JButton btnScale;
+    private javax.swing.JButton btnScaleDown;
+    private javax.swing.JButton btnScaleUp;
     private javax.swing.JFileChooser jFileChooser1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl_original_img;
     private javax.swing.JLabel lbl_processed_img;
+    private javax.swing.JMenu menuFile;
     // End of variables declaration//GEN-END:variables
 
     private void drawOriginalImage() {
@@ -192,19 +235,6 @@ public class MainFrame extends javax.swing.JFrame {
         lbl_processed_img.setIcon(new ImageIcon(processed_image));
     }
     
-    private BufferedImage resampleImageBy2(BufferedImage image){
-        BufferedImage tempImage=new BufferedImage(image.getWidth()*2,
-        image.getHeight()*2, BufferedImage.TYPE_INT_RGB);
-
-        int imgWidth=tempImage.getWidth();
-        int imgHeight=tempImage.getHeight();
-        for(int i=0;i<imgWidth;i++){
-            for(int j=0;j<imgHeight;j++){
-                tempImage.setRGB(i, j, image.getRGB(i/2, j/2));
-            }
-        }
-            
-        return tempImage;
-    }
+    
     
 }
