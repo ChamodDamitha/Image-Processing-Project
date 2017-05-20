@@ -48,6 +48,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jFileChooser1 = new javax.swing.JFileChooser();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         lbl_img = new javax.swing.JLabel();
         btnOpenFile = new javax.swing.JButton();
@@ -60,6 +61,11 @@ public class MainFrame extends javax.swing.JFrame {
         btnNegative = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        radioBtnMean = new javax.swing.JRadioButton();
+        radioBtnMedian = new javax.swing.JRadioButton();
+        radioBtnAlpha = new javax.swing.JRadioButton();
+        btnApplyFilter = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -138,6 +144,56 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Filter"));
+
+        buttonGroup1.add(radioBtnMean);
+        radioBtnMean.setSelected(true);
+        radioBtnMean.setText("Mean Filter");
+        radioBtnMean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBtnMeanActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(radioBtnMedian);
+        radioBtnMedian.setText("Median Filter");
+
+        buttonGroup1.add(radioBtnAlpha);
+        radioBtnAlpha.setText("Alpha Trimmed Filter");
+
+        btnApplyFilter.setText("Apply");
+        btnApplyFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyFilterActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(radioBtnAlpha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(radioBtnMedian)
+                    .addComponent(radioBtnMean)
+                    .addComponent(btnApplyFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(275, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(radioBtnMean)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(radioBtnMedian)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(radioBtnAlpha)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnApplyFilter))
+        );
+
         menuFile.setText("File");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
@@ -166,7 +222,10 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 893, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 893, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -187,7 +246,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton4)
                             .addComponent(jButton3))))
-                .addContainerGap(521, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,7 +276,9 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1)))
                         .addGap(30, 30, 30)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 810, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 810, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -309,6 +370,25 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void radioBtnMeanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtnMeanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radioBtnMeanActionPerformed
+
+    private void btnApplyFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyFilterActionPerformed
+        BufferedImage filteredImage=null;
+        if(radioBtnMean.isSelected()){
+            filteredImage = Filter.filterImage(imageHandler.getCurrentImage(), 0);
+        }
+        else if(radioBtnMedian.isSelected()){
+            filteredImage = Filter.filterImage(imageHandler.getCurrentImage(), -1);
+        }
+        else{
+            filteredImage = Filter.filterImage(imageHandler.getCurrentImage(), 1);
+        }
+        imageHandler.addImage(filteredImage);
+        drawImage(imageHandler.getCurrentImage());
+    }//GEN-LAST:event_btnApplyFilterActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -345,11 +425,13 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnApplyFilter;
     private javax.swing.JButton btnFlip;
     private javax.swing.JButton btnNegative;
     private javax.swing.JButton btnOpenFile;
     private javax.swing.JButton btnScale;
     private javax.swing.JButton btnUndo;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -359,9 +441,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_img;
     private javax.swing.JMenu menuFile;
+    private javax.swing.JRadioButton radioBtnAlpha;
+    private javax.swing.JRadioButton radioBtnMean;
+    private javax.swing.JRadioButton radioBtnMedian;
     private javax.swing.JSpinner spinnerScale;
     // End of variables declaration//GEN-END:variables
 
