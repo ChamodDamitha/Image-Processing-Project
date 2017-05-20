@@ -75,6 +75,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         btnNegative = new javax.swing.JButton();
         btnDither = new javax.swing.JButton();
+        btnShowHistogram = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -357,6 +358,13 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnShowHistogram.setText("Show Histogram");
+        btnShowHistogram.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowHistogramActionPerformed(evt);
+            }
+        });
+
         menuFile.setText("File");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
@@ -392,7 +400,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnUndo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnUndo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(455, 455, 455)
+                        .addComponent(btnShowHistogram)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -401,7 +411,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUndo))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnUndo)
+                        .addComponent(btnShowHistogram)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 810, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -533,6 +545,12 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAutoContrastActionPerformed
 
+    private void btnShowHistogramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowHistogramActionPerformed
+        if(imageHandler.getCurrentImage() != null){
+            ImageHistogram.plotHistogram(imageHandler.getCurrentImage());
+        }
+    }//GEN-LAST:event_btnShowHistogramActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -576,6 +594,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnNegative;
     private javax.swing.JButton btnOpenFile;
     private javax.swing.JButton btnScale;
+    private javax.swing.JButton btnShowHistogram;
     private javax.swing.JButton btnUndo;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
