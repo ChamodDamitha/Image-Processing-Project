@@ -94,7 +94,7 @@ public class ImageHistogram {
     }
      
      
-    public static void plotHistogram(BufferedImage image){
+    public static JFreeChart plotHistogram(BufferedImage image){
         createHistogram(image);
         
         final XYSeries series = new XYSeries("Histogram Data");
@@ -112,8 +112,24 @@ public class ImageHistogram {
 //        series.add(21.9, null);
 //        series.add(25.6, 734.4);
 //        series.add(30.0, 453.2);
+//        
+//        HistogramFrame frame =new HistogramFrame(series);
+//        frame.show();
         
-        HistogramFrame frame =new HistogramFrame(series);
-        frame.show();
+        
+        
+        final XYSeriesCollection data = new XYSeriesCollection(series);
+        final JFreeChart chart = ChartFactory.createXYLineChart(
+            "Image Histogram",
+            "intensity", 
+            "PDF", 
+            data,
+            PlotOrientation.VERTICAL,
+            true,
+            true,
+            false
+        );
+
+        return chart;
     }  
 }
