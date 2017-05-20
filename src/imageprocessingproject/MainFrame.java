@@ -35,14 +35,14 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void initialize(){
 //        file chooser
-        filechooser = new JFileChooser("C:\\Users\\Chamod\\Desktop");
+        filechooser = new JFileChooser("C:");
         filechooser.addChoosableFileFilter(new FileNameExtensionFilter("JPG", "JPG", "JPEG"));
         filechooser.addChoosableFileFilter(new FileNameExtensionFilter("PNG", "PNG"));
         filechooser.addChoosableFileFilter(new FileNameExtensionFilter("GIF", "GIF"));
         filechooser.addChoosableFileFilter(new FileNameExtensionFilter("tt", "tt"));
         
 //        image handler
-        imageHandler = ImageHandler.getInstance();
+        imageHandler = ImageHandler.getInstance(this);
     }
     
     
@@ -79,11 +79,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnNegative = new javax.swing.JButton();
         btnDither = new javax.swing.JButton();
         histoPanel = new javax.swing.JPanel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        menuFile = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        btnSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -374,26 +370,12 @@ public class MainFrame extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        menuFile.setText("File");
-
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Open File");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setText("SAVE");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
-        menuFile.add(jMenuItem1);
-
-        jMenuItem2.setText("jMenuItem2");
-        menuFile.add(jMenuItem2);
-
-        jMenuBar1.add(menuFile);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -405,6 +387,8 @@ public class MainFrame extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(btnOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnUndo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -415,23 +399,29 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnOpenFile, btnSave, btnUndo});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnOpenFile, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(btnUndo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUndo)
+                    .addComponent(btnSave))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(252, Short.MAX_VALUE))
+                        .addContainerGap(283, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(histoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnOpenFile, btnSave, btnUndo});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -464,10 +454,6 @@ public class MainFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "No image selected ...!");
         }
     }//GEN-LAST:event_btnScaleActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnUndoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUndoActionPerformed
         drawImage(imageHandler.getPreviousImage());
@@ -557,6 +543,10 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAutoContrastActionPerformed
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        imageHandler.saveImage();
+    }//GEN-LAST:event_btnSaveActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -599,6 +589,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnFlip;
     private javax.swing.JButton btnNegative;
     private javax.swing.JButton btnOpenFile;
+    private javax.swing.JButton btnSave;
     private javax.swing.JButton btnScale;
     private javax.swing.JButton btnUndo;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -610,10 +601,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JFileChooser jFileChooser1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -622,7 +609,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_img;
-    private javax.swing.JMenu menuFile;
     private javax.swing.JRadioButton radioBtnAlpha;
     private javax.swing.JRadioButton radioBtnMean;
     private javax.swing.JRadioButton radioBtnMedian;

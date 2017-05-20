@@ -3,9 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/CHAMOD/Documents/NetBeansProjects/ImageProcessingProject/src/imageprocessingproject/ImageProcessingProject.java</file>
-            <file>file:/C:/Users/CHAMOD/Documents/NetBeansProjects/ImageProcessingProject/src/imageprocessingproject/ResampleImage.java</file>
-            <file>file:/C:/Users/CHAMOD/Documents/NetBeansProjects/ImageProcessingProject/src/imageprocessingproject/MainFrame.java</file>
+            <file>file:/F:/Image-Processing-Project/src/imageprocessingproject/Dither.java</file>
+            <file>file:/F:/Image-Processing-Project/src/imageprocessingproject/ResampleImage.java</file>
+            <file>file:/F:/Image-Processing-Project/src/imageprocessingproject/GrayLevelChanger.java</file>
+            <file>file:/F:/Image-Processing-Project/src/imageprocessingproject/ImageHandler.java</file>
+            <file>file:/F:/Image-Processing-Project/src/imageprocessingproject/ImageHistogram.java</file>
+            <file>file:/F:/Image-Processing-Project/src/imageprocessingproject/Filter.java</file>
+            <file>file:/F:/Image-Processing-Project/build.xml</file>
+            <file>file:/F:/Image-Processing-Project/src/imageprocessingproject/ImageRotation.java</file>
+            <file>file:/F:/Image-Processing-Project/src/imageprocessingproject/MainFrame.java</file>
+            <file>file:/F:/Image-Processing-Project/manifest.mf</file>
         </group>
     </open-files>
 </project-private>

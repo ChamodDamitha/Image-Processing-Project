@@ -6,7 +6,16 @@
 package imageprocessingproject;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.naming.Context;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,16 +23,17 @@ import java.util.ArrayList;
  */
 public class ImageHandler {
     private static ImageHandler handler = null;
+    private JFrame context;
     
-    public static ImageHandler getInstance(){
+    public static ImageHandler getInstance(JFrame context){
         if(handler == null){
-            handler = new ImageHandler();
+            handler = new ImageHandler(context);
         }
         return handler;
     }
     
-    private ImageHandler(){
-        
+    private ImageHandler(JFrame context){
+        this.context=context;
     }
     
     ArrayList<BufferedImage> image_queue = new ArrayList<>();
@@ -52,5 +62,22 @@ public class ImageHandler {
         }
     }
     
+    
+    public void saveImage(){
+        if(getCurrentImage()!=null){
+            JFileChooser filechooser = new JFileChooser("C:");
+            if (filechooser.showSaveDialog(context) == JFileChooser.APPROVE_OPTION) {
+                String newImageExtention = filechooser.getFileFilter().getDescription();
+
+                File newImagePath = new File(filechooser.getSelectedFile().toString() + ".png");
+                try {
+                    ImageIO.write(getCurrentImage(), "png", newImagePath);
+                    JOptionPane.showMessageDialog(filechooser, "File is saved successfully...!");
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(filechooser, "File is not saved...!");
+                }
+            }
+        }
+    }
     
 }
