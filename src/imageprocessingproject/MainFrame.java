@@ -14,7 +14,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import org.hsqldb.map.BitMap;
+//import org.hsqldb.map.BitMap;
 
 /**
  *
@@ -22,43 +22,38 @@ import org.hsqldb.map.BitMap;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    JFileChooser filechooser;
-    private BufferedImage original_image,processed_image;
-    
-    private BitMap bitMapOriginalImg=null;
+    private JFileChooser filechooser;
+    private ImageHandler imageHandler = null;
            
     public MainFrame() {
         initComponents();
-        
+        initialize();
+      }
+
+    private void initialize(){
+//        file chooser
         filechooser = new JFileChooser("C:\\Users\\Chamod\\Desktop");
         filechooser.addChoosableFileFilter(new FileNameExtensionFilter("JPG", "JPG", "JPEG"));
         filechooser.addChoosableFileFilter(new FileNameExtensionFilter("PNG", "PNG"));
         filechooser.addChoosableFileFilter(new FileNameExtensionFilter("GIF", "GIF"));
         filechooser.addChoosableFileFilter(new FileNameExtensionFilter("tt", "tt"));
         
-        
-        
+//        image handler
+        imageHandler = ImageHandler.getInstance();
     }
-
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jFileChooser1 = new javax.swing.JFileChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
-        lbl_original_img = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        lbl_processed_img_cubic_int = new javax.swing.JLabel();
+        lbl_img = new javax.swing.JLabel();
         btnOpenFile = new javax.swing.JButton();
         btnScale = new javax.swing.JButton();
         spinnerScale = new javax.swing.JSpinner();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        lbl_processed_img_linear_int = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        lbl_processed_img_nearest_neighbour = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        btnUndo = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -66,12 +61,10 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
-        lbl_original_img.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jScrollPane1.setViewportView(lbl_original_img);
-
-        lbl_processed_img_cubic_int.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jScrollPane2.setViewportView(lbl_processed_img_cubic_int);
+        lbl_img.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jScrollPane1.setViewportView(lbl_img);
 
         btnOpenFile.setText("OPEN");
         btnOpenFile.addActionListener(new java.awt.event.ActionListener() {
@@ -90,17 +83,12 @@ public class MainFrame extends javax.swing.JFrame {
         spinnerScale.setValue(200
         );
 
-        jLabel1.setText("NEAREST NEIGHBOUR METHOD");
-
-        jLabel2.setText("BI-LINEAR INTERPOLATION METHOD");
-
-        lbl_processed_img_linear_int.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jScrollPane4.setViewportView(lbl_processed_img_linear_int);
-
-        lbl_processed_img_nearest_neighbour.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jScrollPane3.setViewportView(lbl_processed_img_nearest_neighbour);
-
-        jLabel3.setText("CUBIC INTERPOLATION METHOD");
+        btnUndo.setText("Undo");
+        btnUndo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUndoActionPerformed(evt);
+            }
+        });
 
         menuFile.setText("File");
 
@@ -129,55 +117,30 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 893, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(254, 254, 254)
-                                .addComponent(jLabel2)))
+                        .addComponent(btnUndo)
+                        .addGap(25, 25, 25)
+                        .addComponent(btnScale, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnOpenFile, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                            .addComponent(btnScale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(4, 4, 4)
                         .addComponent(spinnerScale, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(551, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnScale, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnScale, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(spinnerScale, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(spinnerScale, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnUndo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 810, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -187,8 +150,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void btnOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenFileActionPerformed
         if (filechooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
              try {
-                original_image = ImageIO.read(filechooser.getSelectedFile());
-                drawOriginalImage();
+                imageHandler.addImage(ImageIO.read(filechooser.getSelectedFile()));
+                drawImage(imageHandler.getCurrentImage());
             } catch (NullPointerException ex) {
 //                open_tt_files(filechooser.getSelectedFile().toPath());
             } catch (IOException e) {
@@ -201,19 +164,25 @@ public class MainFrame extends javax.swing.JFrame {
 
         float scale=(Integer)spinnerScale.getValue()/100.0f;
         
-        processed_image=ResampleImage.resampleImage_nearest_neighbour(original_image, scale);
-        drawProcessedImage(lbl_processed_img_nearest_neighbour,processed_image);
+        BufferedImage original_image = imageHandler.getCurrentImage();
         
-        
-        processed_image=ResampleImage.resampleImage_linear_interpolation(original_image, scale);
-        drawProcessedImage(lbl_processed_img_linear_int, processed_image);
-        
-        
+        if(original_image != null){
+            BufferedImage processed_image=ResampleImage.resampleImage_linear_interpolation(original_image, scale);
+            imageHandler.addImage(processed_image);
+            drawImage(imageHandler.getCurrentImage());
+        }        
+        else{
+            JOptionPane.showMessageDialog(rootPane, "No image selected ...!");
+        }
     }//GEN-LAST:event_btnScaleActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void btnUndoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUndoActionPerformed
+        drawImage(imageHandler.getPreviousImage());
+    }//GEN-LAST:event_btnUndoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,36 +222,28 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOpenFile;
     private javax.swing.JButton btnScale;
+    private javax.swing.JButton btnUndo;
     private javax.swing.JFileChooser jFileChooser1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JLabel lbl_original_img;
-    private javax.swing.JLabel lbl_processed_img_cubic_int;
-    private javax.swing.JLabel lbl_processed_img_linear_int;
-    private javax.swing.JLabel lbl_processed_img_nearest_neighbour;
+    private javax.swing.JLabel lbl_img;
     private javax.swing.JMenu menuFile;
     private javax.swing.JSpinner spinnerScale;
     // End of variables declaration//GEN-END:variables
 
-    private void drawOriginalImage() {
-        lbl_original_img.setSize(original_image.getWidth(), original_image.getHeight());
-        lbl_original_img.setIcon(new ImageIcon(original_image));
+    private void drawImage(BufferedImage image) {
+        if(image == null){
+            JOptionPane.showMessageDialog(rootPane, "No image to show ... !");
+        }
+        else{
+            lbl_img.setSize(image.getWidth(), image.getHeight());
+            lbl_img.setIcon(new ImageIcon(image));   
+        }
     }
-    
-     private void drawProcessedImage(JLabel jLabel,BufferedImage image) {
-        jLabel.setSize(image.getWidth(), image.getHeight());
-        jLabel.setIcon(new ImageIcon(image));
-    }
-    
+      
     
     
 }
