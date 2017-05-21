@@ -54,8 +54,6 @@ public class Filter {
     
     private static int calAverage(ArrayList<Integer> a, int p){
         
-        
-//        System.out.println(a.toString());
         if(p<0){
             p=(n*n-1)/2;
         }
