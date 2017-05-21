@@ -53,15 +53,26 @@ public class Filter {
     
     
     private static int calAverage(ArrayList<Integer> a, int p){
+        
+        
 //        System.out.println(a.toString());
         if(p<0){
-            p=(n-1)/2;
+            p=(n*n-1)/2;
         }
         int sum=0;
-        for(int i=p; i<n-p; i++){
-            sum+=a.get(i);
+        for(int i=p; i<n*n-p; i++){
+            try{
+                sum+=a.get(i);
+            }
+            catch(IndexOutOfBoundsException e){
+                return Math.round(sum/i);
+            }
         }
-        return Math.round(sum/(n-2*p));
+//        if(a.get(a.size()-1)-a.get(0)>100){
+//            System.out.println(a.toString()+" - "+Math.round(sum/(n*n-2*p)));
+//        }
+        
+        return Math.round(sum/(n*n-2*p));
     }
     
     private static ArrayList<Integer> getOrderedNeighbours(BufferedImage image, int x , int y, int rgb_status){

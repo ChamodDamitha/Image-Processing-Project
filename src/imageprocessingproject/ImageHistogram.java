@@ -37,9 +37,9 @@ public class ImageHistogram {
         for(int i=0 ; i<width ; i++){
             for(int j=0 ; j<height ; j++){
                 c=new Color(image.getRGB(i, j));
-                r = (int)(c.getRed()*contrast_lut[c.getRed()]);
-                g = (int)(c.getGreen()*contrast_lut[c.getGreen()]);
-                b = (int)(c.getBlue()*contrast_lut[c.getBlue()]);
+                r = (int)(255*contrast_lut[c.getRed()]);
+                g = (int)(255*contrast_lut[c.getGreen()]);
+                b = (int)(255*contrast_lut[c.getBlue()]);
                 tempImage.setRGB(i, j, new Color(r,g,b,c.getAlpha()).getRGB());
             }
         }
@@ -102,21 +102,6 @@ public class ImageHistogram {
         for(int i=0 ; i<histogram.length; i++){
             series.add(i,histogram[i]);
         }
-//        
-//        series.add(1.0, 500.2);
-//        series.add(5.0, 694.1);
-//        series.add(4.0, 100.0);
-//        series.add(12.5, 734.4);
-//        series.add(17.3, 453.2);
-//        series.add(21.2, 500.2);
-//        series.add(21.9, null);
-//        series.add(25.6, 734.4);
-//        series.add(30.0, 453.2);
-//        
-//        HistogramFrame frame =new HistogramFrame(series);
-//        frame.show();
-        
-        
         
         final XYSeriesCollection data = new XYSeriesCollection(series);
         final JFreeChart chart = ChartFactory.createXYLineChart(
