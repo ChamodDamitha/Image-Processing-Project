@@ -67,4 +67,22 @@ public class GrayLevelChanger {
         }
         return tempImage;
     }
+
+    public static BufferedImage grayscaleImage(BufferedImage image) {
+        int height = image.getHeight();
+        int width = image.getWidth(); 
+         
+        BufferedImage tempImage=new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+        Color c;
+        int gray_val;
+        
+        for(int i=0; i<width; i++){
+            for(int j=0; j<height; j++){
+                c = new Color(image.getRGB(i, j));
+                gray_val = (c.getRed()+c.getGreen()+c.getBlue())/3;
+                tempImage.setRGB(i, j, new Color(gray_val,gray_val,gray_val,c.getAlpha()).getRGB());
+            }
+        }
+        return tempImage;
+    }
 }

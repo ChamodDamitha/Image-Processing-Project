@@ -78,6 +78,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         btnNegative = new javax.swing.JButton();
         btnDither = new javax.swing.JButton();
+        btnGrayScale = new javax.swing.JButton();
         histoPanel = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
 
@@ -310,6 +311,13 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        btnGrayScale.setText("Grayscale");
+        btnGrayScale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGrayScaleActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -319,12 +327,15 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(btnNegative, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDither, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnGrayScale, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnNegative, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
             .addComponent(btnDither, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnGrayScale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -547,6 +558,14 @@ public class MainFrame extends javax.swing.JFrame {
         imageHandler.saveImage();
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    private void btnGrayScaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrayScaleActionPerformed
+         if(imageHandler.getCurrentImage() != null){
+            BufferedImage processed_image=GrayLevelChanger.grayscaleImage(imageHandler.getCurrentImage());
+            imageHandler.addImage(processed_image);
+            drawImage(imageHandler.getCurrentImage());
+        }
+    }//GEN-LAST:event_btnGrayScaleActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -587,6 +606,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnAutoContrast;
     private javax.swing.JButton btnDither;
     private javax.swing.JButton btnFlip;
+    private javax.swing.JButton btnGrayScale;
     private javax.swing.JButton btnNegative;
     private javax.swing.JButton btnOpenFile;
     private javax.swing.JButton btnSave;
