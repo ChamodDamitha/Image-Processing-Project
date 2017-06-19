@@ -79,6 +79,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnNegative = new javax.swing.JButton();
         btnDither = new javax.swing.JButton();
         btnGrayScale = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         histoPanel = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
 
@@ -318,6 +319,13 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton7.setText("Normalize");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -329,13 +337,15 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(btnDither, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGrayScale, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnNegative, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
             .addComponent(btnDither, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnGrayScale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -546,9 +556,11 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDitherActionPerformed
 
     private void btnAutoContrastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoContrastActionPerformed
+        
+//                    ImageHistogram.autoContrastImage(imageHandler.getCurrentImage());
         if(imageHandler.getCurrentImage() != null){
             BufferedImage processed_image=
-                    ImageHistogram.autoContrastImage(imageHandler.getCurrentImage());
+                    ContrastStrech.contrastStreach(imageHandler.getCurrentImage());
             imageHandler.addImage(processed_image);
             drawImage(imageHandler.getCurrentImage());
         }
@@ -565,6 +577,14 @@ public class MainFrame extends javax.swing.JFrame {
             drawImage(imageHandler.getCurrentImage());
         }
     }//GEN-LAST:event_btnGrayScaleActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        if(imageHandler.getCurrentImage() != null){
+            BufferedImage processed_image=ImageHistogram.normalizeImage(imageHandler.getCurrentImage());
+            imageHandler.addImage(processed_image);
+            drawImage(imageHandler.getCurrentImage());
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -620,6 +640,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

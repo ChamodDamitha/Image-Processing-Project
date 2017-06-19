@@ -23,6 +23,57 @@ public class ImageHistogram {
     
     private static double [] contrast_lut;
     
+    
+     public static BufferedImage normalizeImage(BufferedImage image){
+         int height = image.getHeight();
+        int width = image.getWidth(); 
+        
+        
+        int r,g,b,minr=255,ming=255,minb=255,maxr=0,maxg=0,maxb=0;
+        Color c;
+        
+        BufferedImage tempImage = new BufferedImage(width, height,
+                BufferedImage.TYPE_INT_RGB);
+        
+        for(int i=0 ; i<width ; i++){
+            for(int j=0 ; j<height ; j++){
+                c = new Color(image.getRGB(i, j));
+                if(minr > c.getRed()){
+                    minr = c.getRed();
+                }
+                if(ming > c.getGreen()){
+                    ming = c.getGreen();
+                }
+                if(minb > c.getBlue()){
+                    minb = c.getBlue();
+                }
+                if(maxr < c.getRed()){
+                    maxr = c.getRed();
+                }
+                if(maxg < c.getGreen()){
+                    maxg = c.getGreen();
+                }
+                if(maxb < c.getBlue()){
+                    maxb = c.getBlue();
+                }
+            }
+        }
+        
+        for(int i=0 ; i<width ; i++){
+            for(int j=0 ; j<height ; j++){
+                c = new Color(image.getRGB(i, j));
+                r = (int)((c.getRed()-minr)*255/(maxr-minr));
+                g = (int)((c.getGreen()-ming)*255/(maxg-ming));
+                b = (int)((c.getBlue()-minb)*255/(maxb-minb));
+                tempImage.setRGB(i, j, new Color(r,g,b,c.getAlpha()).getRGB());
+            }
+        }
+        
+        return tempImage;
+     }
+    
+    
+    
     public static BufferedImage autoContrastImage(BufferedImage image){
         createContrastLUT(image);
         
@@ -46,6 +97,8 @@ public class ImageHistogram {
         
         return tempImage;
     }
+    
+    
     
     
     private static void createContrastLUT(BufferedImage image){
