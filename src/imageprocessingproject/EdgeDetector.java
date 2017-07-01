@@ -74,6 +74,7 @@ public class EdgeDetector {
                 }
                 else{
                     tempImage.setRGB(i, j, new Color(0,0,0).getRGB());
+                
                 }
                 val=0;
             }
