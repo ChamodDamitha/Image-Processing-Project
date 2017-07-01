@@ -97,12 +97,14 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Image Editer");
         setResizable(false);
 
         lbl_img.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jScrollPane1.setViewportView(lbl_img);
 
         btnOpenFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageprocessingproject/rsz_folder-35945_640.png"))); // NOI18N
+        btnOpenFile.setToolTipText("Open Image");
         btnOpenFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOpenFileActionPerformed(evt);
@@ -110,6 +112,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         btnUndo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageprocessingproject/rsz_icon-ios7-undo-512.png"))); // NOI18N
+        btnUndo.setToolTipText("Undo");
         btnUndo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUndoActionPerformed(evt);
@@ -173,6 +176,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Transformation", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageprocessingproject/rsz_1rsz_rotate_right_arrow.png"))); // NOI18N
+        jButton2.setToolTipText("Rotate Clockwise 90 degrees");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -180,6 +184,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageprocessingproject/rsz_rotate_left_arrow.png"))); // NOI18N
+        jButton1.setToolTipText("Rotate Anti-Clockwise 90 degrees");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -187,6 +192,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         btnFlip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageprocessingproject/rsz_vertical_align_mirror-512.png"))); // NOI18N
+        btnFlip.setToolTipText("Flip Horizontal");
         btnFlip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFlipActionPerformed(evt);
@@ -264,6 +270,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lighting", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageprocessingproject/rsz_1enlighten_sun_light_brightness-512.png"))); // NOI18N
+        jButton3.setToolTipText("Increase Brightness");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -271,6 +278,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageprocessingproject/rsz_enlighten_sun_light_brightness-512.png"))); // NOI18N
+        jButton4.setToolTipText("Decrease Brightness");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -278,6 +286,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageprocessingproject/rsz_moon_last_quarter-512.png"))); // NOI18N
+        jButton5.setToolTipText("Increase Contrast");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -285,6 +294,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageprocessingproject/rsz_basic3-102_visibility_contrast_brightness-512.png"))); // NOI18N
+        jButton6.setToolTipText("Decrease Contrast");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -518,6 +528,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageprocessingproject/rsz_save-xxl.png"))); // NOI18N
+        btnSave.setToolTipText("Save Image");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);

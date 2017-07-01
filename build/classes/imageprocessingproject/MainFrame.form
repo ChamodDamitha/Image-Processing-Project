@@ -13,6 +13,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="Image Editer"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -97,6 +98,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/imageprocessingproject/rsz_folder-35945_640.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Open Image"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOpenFileActionPerformed"/>
@@ -107,6 +109,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/imageprocessingproject/rsz_icon-ios7-undo-512.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Undo"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUndoActionPerformed"/>
@@ -298,6 +301,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/imageprocessingproject/rsz_1rsz_rotate_right_arrow.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Rotate Clockwise 90 degrees"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
@@ -308,6 +312,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/imageprocessingproject/rsz_rotate_left_arrow.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Rotate Anti-Clockwise 90 degrees"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -318,6 +323,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/imageprocessingproject/rsz_vertical_align_mirror-512.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Flip Horizontal"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFlipActionPerformed"/>
@@ -451,6 +457,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/imageprocessingproject/rsz_1enlighten_sun_light_brightness-512.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Increase Brightness"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
@@ -461,6 +468,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/imageprocessingproject/rsz_enlighten_sun_light_brightness-512.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Decrease Brightness"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
@@ -471,6 +479,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/imageprocessingproject/rsz_moon_last_quarter-512.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Increase Contrast"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
@@ -481,6 +490,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/imageprocessingproject/rsz_basic3-102_visibility_contrast_brightness-512.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Decrease Contrast"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
@@ -770,6 +780,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/imageprocessingproject/rsz_save-xxl.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Save Image"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveActionPerformed"/>
