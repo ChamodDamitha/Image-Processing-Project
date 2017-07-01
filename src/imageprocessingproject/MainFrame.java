@@ -278,8 +278,18 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageprocessingproject/rsz_moon_last_quarter-512.png"))); // NOI18N
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageprocessingproject/rsz_basic3-102_visibility_contrast_brightness-512.png"))); // NOI18N
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         btnAutoContrast.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnAutoContrast.setText("Auto Contrast");
@@ -724,6 +734,22 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnApplyConversionActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if(imageHandler.getCurrentImage() != null){
+            BufferedImage processed_image=ContrastStrech.contrastChange(imageHandler.getCurrentImage(),true);
+            imageHandler.addImage(processed_image);
+            drawImage(imageHandler.getCurrentImage());
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        if(imageHandler.getCurrentImage() != null){
+            BufferedImage processed_image=ContrastStrech.contrastChange(imageHandler.getCurrentImage(),false);
+            imageHandler.addImage(processed_image);
+            drawImage(imageHandler.getCurrentImage());
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments

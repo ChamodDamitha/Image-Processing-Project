@@ -472,6 +472,9 @@
                   <Image iconType="3" name="/imageprocessingproject/rsz_moon_last_quarter-512.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton6">
               <Properties>
@@ -479,6 +482,9 @@
                   <Image iconType="3" name="/imageprocessingproject/rsz_basic3-102_visibility_contrast_brightness-512.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnAutoContrast">
               <Properties>
